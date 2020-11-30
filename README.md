@@ -1,12 +1,12 @@
 # Scatter-Letters
-A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other, and build a GIF.  
+A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other and build a GIF.  
 
 ## Why?
 Because I tought it would be cool.  
 
 ## How?
-It uses OpenCV to create a mask from an image, creates a plot filled with random x/y coordinates, and filter the points inside the mask.  
-Then it uses Matplotlib to draw the plots and transitions, and ImageIO to build a gif.  
+It uses OpenCV to create a mask from an image, draw a plot filled with random x/y coordinates, and filter the points inside the mask.  
+Then it uses Matplotlib to draw the plots and transitions and ImageIO to build a gif.  
 
 ## How to use
 get_masked_data() - Create a list of random x/y coordinates and uses an image/mask to filter them.  
@@ -16,11 +16,11 @@ build_gif() - Uses lists of coordinates to build the scatter plots and the trans
 [![](data.gif)](https://imgur.com/7qkIvcJ)
 [![](abc.gif)](https://imgur.com/4bAQFuP)
 
-## Creating plot with new image
+## Creating plot with a new image
 
 - Save a .png file with a mask at images/letters.
 - The image should be 1000x1000 pixels.
-- The mask should be black with white background. See example bellow.
+- The mask should be black with a white background. See the example below.
 - Run get_masked_data() with the name of the .png file and the desired intensity
 
 ### Example:
