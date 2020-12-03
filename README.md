@@ -1,5 +1,6 @@
 # Scatter-Letters
 A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other and build a GIF.  
+[Medium Article - Basics of GIFs with Python’s Matplotlib](https://towardsdatascience.com/basics-of-gifs-with-pythons-matplotlib-54dd544b6f30)  
 
 ## Why?
 Because I tought it would be cool.  
