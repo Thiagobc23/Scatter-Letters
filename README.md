@@ -14,8 +14,9 @@ get_masked_data() - Create a list of random x/y coordinates and uses an image/ma
 text_to_data() - Transform a text into a list of lists with the previous method.  
 build_gif() - Uses lists of coordinates to build the scatter plots and the transitions, then save the result in a gif.  
 
-![](data.gif)
-![](abc.gif)
+![](data.gif)  
+![](abc.gif)  
+![](mac.gif)  
 
 ## Creating plot with a new image
 

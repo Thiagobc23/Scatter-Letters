@@ -44,7 +44,7 @@ def text_to_data(txt, repeat=True, intensity = 2):
 
 def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10, 
               bg_color='#95A4AD', marker_color='#283F4E',
-              marker_size = 25, fps=4):
+              marker_size = 25, fps=4, alpha=1):
     print('building plots\n')
     filenames = []
     for index in np.arange(0, len(coordinates_lists)-1):
@@ -78,7 +78,7 @@ def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10,
             # plot
             fig, ax = plt.subplots(figsize=(6, 6), subplot_kw=dict(aspect="equal"))
             ax.set_facecolor(bg_color)
-            plt.scatter(x_temp, y_temp, c=marker_color, s = marker_size)
+            plt.scatter(x_temp, y_temp, c=marker_color, s = marker_size, alpha=alpha)
 
             plt.xlim(0,1000)
             plt.ylim(0,1000)
