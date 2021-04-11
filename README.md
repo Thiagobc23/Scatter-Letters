@@ -30,6 +30,7 @@ build_gif() - Uses lists of coordinates to build the scatter plots and the trans
 <br><br><br><br><br>
 
 Image at `images/letters/A.png`  
+  
 `x, y = get_masked_data('a', intensity = 2)`  
 `plt.scatter(x, y)`  
 `plt.xlim(0, 1000)`  
