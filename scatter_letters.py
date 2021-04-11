@@ -42,7 +42,9 @@ def text_to_data(txt, repeat=True, intensity = 2):
         letters.append(get_masked_data(txt[0], intensity = intensity))    
     return letters
 
-def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10, bg_color='#95A4AD', marker_color='#283F4E', marker_size = 25):
+def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10, 
+              bg_color='#95A4AD', marker_color='#283F4E',
+              marker_size = 25, fps=4):
     print('building plots\n')
     filenames = []
     for index in np.arange(0, len(coordinates_lists)-1):
@@ -105,7 +107,7 @@ def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10, bg_color='#95A
 
     # Build GIF
     print('creating gif\n')
-    with imageio.get_writer(f'{gif_name}.gif', mode='I') as writer:
+    with imageio.get_writer(f'{gif_name}.gif', mode='I', fps=fps) as writer:
         for filename in filenames:
             image = imageio.imread(filename)
             writer.append_data(image)
