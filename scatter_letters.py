@@ -44,7 +44,7 @@ def text_to_data(txt, repeat=True, intensity = 2):
 
 def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10, 
               bg_color='#95A4AD', marker_color='#283F4E',
-              marker_size = 25, fps=4, alpha=1):
+              marker_size = 25, fps=4, alpha=1, axis_on=True):
     print('building plots\n')
     filenames = []
     for index in np.arange(0, len(coordinates_lists)-1):
@@ -86,12 +86,19 @@ def build_gif(coordinates_lists, gif_name = 'movie', n_frames=10,
             # remove spines
             ax.spines['right'].set_visible(False)
             ax.spines['top'].set_visible(False)
-
-            # grid
-            ax.set_axisbelow(True)
-            ax.yaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
-            ax.xaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
-
+            if(axis_on):
+                # grid
+                ax.set_axisbelow(True)
+                ax.yaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
+                ax.xaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
+            else:
+                # remove spines
+                ax.spines['left'].set_visible(False)
+                ax.spines['bottom'].set_visible(False)
+                # remove ticks
+                plt.xticks([])
+                plt.yticks([])
+                
             # build file name and append to list of file names
             filename = f'images/frame_{index}_{i}.png'
 

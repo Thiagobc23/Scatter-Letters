@@ -9,11 +9,12 @@ coordinates_lists = scatter_letters.text_to_data('MAC__',
 scatter_letters.build_gif(coordinates_lists, 
           gif_name = 'movie', 
           n_frames=32, 
-          bg_color='#95A4AD', 
-          marker_color='#283F4E', 
+          bg_color='#ffb400', 
+          marker_color='#2E2E2E', 
           marker_size = 1,
           fps=24,
-          alpha=0.3)
+          alpha=0.3,
+          axis_on=False)
 
 ### Test 2 ###
 """
