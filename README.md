@@ -11,12 +11,19 @@ Then it uses Matplotlib to draw the plots and transitions and ImageIO to build a
 
 ## How to use
 get_masked_data() - Create a list of random x/y coordinates and uses an image/mask to filter them.  
+  
 text_to_data() - Transform a text into a list of lists with the previous method.  
+  
 build_gif() - Uses lists of coordinates to build the scatter plots and the transitions, then save the result in a gif.  
-
-![](data.gif)  
-![](abc.gif)  
-![](mac.gif)  
+  
+DATA  
+![](images/examples/data.gif)    
+ABC...XYZ  
+![](images/examples/abc.gif)  
+Fat Mac (It's Always Sunny)  
+![](images/examples/mac.gif)  
+Rick  
+![](images/examples/rick.gif)  
 
 ## Creating plot with a new image
 
@@ -38,4 +45,4 @@ Image at `images/letters/A.png`
 `plt.ylim(0, 1000)`  
 `plt.savefig('example.png') `
 
-![](images/example.png)
+![](images/examples/example.png)
