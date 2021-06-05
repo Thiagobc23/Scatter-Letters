@@ -1,53 +1,27 @@
-import scatter_letters as sl
-import pandas as pd
-import cv2
+from scatter_letters import sl
 
+# all parameters
+sl.text_to_gif('data_', # text to be converted to gif
+               out_path='output', # relative path to save temp files and output
+               repeat=True, # repeat first letter at the end
+               intensity=10, # more info below*
+               rand=True, # True=random points, false= evenly sparced
+               gif_name='movie', # name of the output file. -> movie.gif
+               n_frames=24, # number of frames in the transition
+               bg_color='#95A4AD', # background color
+               marker='o', # marker style
+               marker_color='#283F4E', # marker color 
+               marker_size=10, # marker size
+               fps=24, # frames per second
+               alpha=1, # markers opacity
+               axis_on=True, # plot spines and grid
+               sort_coords=False, # sort points in the transition - options(False, 'x', 'y')
+               sort_coords_asc=True, # True - sort ascending / False - sort descending
+               in_path=None, # for custom input paths
+               hold_frames=5) # hold the complete letter for x frames
 
-
-### Example 1 ###
-### scatter_letters - quick gif ###
-sl.scatter_letters('data_', path='images/letters/')
-"""
-### Example 2 ###
-### scatter_letters - All arguments ###
-sl.scatter_letters('MAC[MAC]', repeat=True, intensity=40, rand = True, gif_name='movie2', n_frames=32, 
-      bg_color='#ffb400', marker='o', marker_color='#2b2300', marker_size=3, fps = 32,
-      alpha = 1, axis_on = True, sort_coords = False, sort_coords_asc = True)
-
-### Example 3 ###
-### text_to_data and build_gif methods ###
-
-coordinates_lists = sl.text_to_data('star[STAR]_', # text to be converted
-                                 repeat=True, # repeat first letter at end
-                                 intensity=10,
-                                 rand = True ) # random points or evenly spaced) 
-
-sl.build_gif(coordinates_lists, 
-          gif_name = 'movie3', # name of the gif that'll be created
-          n_frames = 24, # number of frames per transition
-          bg_color = '#95A4AD', # background color
-          marker='*',
-          marker_color = '#283F4E', 
-          marker_size = 10, 
-          fps = 24, # frames per second
-          alpha = 1, # opacity
-          axis_on = True, # axis and grid display
-          sort_coords = 'x',
-          sort_coords_asc = True
-          )
-"""
-
-### Example 3 ###
-"""
-sl.scatter_letters('RICK[RICK][RICK]', 
-                   repeat=True, 
-                   intensity=70,
-                   gif_name = 'movie4', 
-                   n_frames=24, 
-                   bg_color='#53abee', 
-                   marker_color='#1D1D1D', 
-                   marker_size = 1,
-                   fps=24,
-                   alpha=0.3,
-                   axis_on=False)
-"""
+# *intensity: 
+# When plotting random points (rand=True), this is how many times it'll generate 500 points at the start (before applying the mask).
+# With randoms a higher intensity means more points.
+# When plotting evenly sparced points (rand=False), this is the distance between the points.
+# With even points a lower intensity means the points will be closer to each other, so more points are plotted.
