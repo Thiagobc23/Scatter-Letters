@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 setup(
     name='scatter_letters',
     packages=find_packages(include=['scatter_letters']),
-    version='0.0.4',
+    version='0.0.5',
     description="A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other and build a GIF.",
     long_description=long_description,
     long_description_content_type="text/markdown",
