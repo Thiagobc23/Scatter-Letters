@@ -6,6 +6,9 @@ import cv2
 import os
 import re
 import pandas as pd
+import math
+from collections import OrderedDict
+import gc
 
 # check if in a ipython enviorment
 try:
@@ -13,6 +16,11 @@ try:
     from tqdm.notebook import tqdm
 except:
     from tqdm import tqdm
+
+def distance(v1, v2):
+    dist = [(a - b)**2 for a, b in zip(v1, v2)]
+    dist = math.sqrt(sum(dist))
+    return dist
 
 # transform a letter into random x/y points with the shape of that letter
 def get_masked_data(letter, intensity = 2, rand=True, in_path=None):
@@ -112,7 +120,8 @@ def text_to_data(txt, repeat=True, intensity = 10, rand=True, in_path=None):
 def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=10, 
               bg_color='#95A4AD', marker='.', marker_color='#283F4E',
               marker_size=25, fps=4, alpha=1, axis_on=True,
-              sort_coords=False, sort_coords_asc=False, hold_frames=5):
+              sort_coords=False, sort_coords_asc=False, hold_frames=5,
+              sort_euclidean=False):
     # if output directory doesn't exist make one
     try:
         os.stat(out_path)
@@ -129,19 +138,18 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
         x1 = coordinates_lists[index+1][0]
         y1 = coordinates_lists[index+1][1]
 
-        if sort_coords:
-            xy = pd.DataFrame({'x':x, 'y':y}).sort_values(sort_coords, ascending=sort_coords_asc)
-            xy1 = pd.DataFrame({'x':x1, 'y':y1}).sort_values(sort_coords, ascending=sort_coords_asc)
-            x = xy['x'].values.tolist()
-            y = xy['y'].values.tolist()
-            x1 = xy1['x'].values.tolist()
-            y1 = xy1['y'].values.tolist()
-
         """
         Check if sizes match (Current coordinates and next coordinates)
         When they don't match we increase the smaller list by repeating 
         it's values until it reaches the same size as the bigger list 
         """
+        # start by removing duplicates from the first list of coords
+        non_duplicates = OrderedDict.fromkeys(zip(x, y))
+        x = [key[0] for key in non_duplicates]
+        y = [key[1] for key in non_duplicates]
+        del non_duplicates
+        gc.collect()
+
         while len(x) < len(x1):
             diff = len(x1) - len(x)
             x = x + x[:diff]
@@ -151,7 +159,41 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
             diff = len(x) - len(x1)
             x1 = x1 + x1[:diff]
             y1 = y1 + y1[:diff]
+        del diff
+        gc.collect()
 
+        if sort_coords:
+            xy = pd.DataFrame({'x':x, 'y':y}).sort_values(sort_coords, ascending=sort_coords_asc)
+            xy1 = pd.DataFrame({'x':x1, 'y':y1}).sort_values(sort_coords, ascending=sort_coords_asc)
+            
+            x = xy['x'].values.tolist()
+            y = xy['y'].values.tolist()
+            x1 = xy1['x'].values.tolist()
+            y1 = xy1['y'].values.tolist()
+            del xy
+            del xy1
+            gc.collect()
+
+            if sort_euclidean:
+                sorted_x1 = []
+                sorted_y1 = []
+
+                for i in tqdm(range(len(x)), desc='Euclidean sort', leave=False):
+                    dist = 9999999
+                    for i in range(len(x1)):
+                        dist_n = distance((x[0], y[0]), (x1[i], y1[i]))
+                        if dist_n < dist:
+                            dist = dist_n
+                            idx = i
+
+                    sorted_x1.append(x1.pop(idx))
+                    sorted_y1.append(y1.pop(idx))
+                x1 = sorted_x1
+                y1 = sorted_y1
+                del sorted_x1
+                del sorted_y1
+                gc.collect()
+                
         # calculate paths
         x_path = np.array(x1) - np.array(x)
         y_path = np.array(y1) - np.array(y)
@@ -219,7 +261,8 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
    
 def text_to_gif(text, out_path='output', repeat=True, intensity=10, rand = True, gif_name='movie', n_frames=24, 
       bg_color='#95A4AD', marker='o', marker_color='#283F4E', marker_size=10, fps=24,
-      alpha=1, axis_on=True, sort_coords=False, sort_coords_asc=True, in_path=None, hold_frames=5):
+      alpha=1, axis_on=True, sort_coords=False, sort_coords_asc=True, in_path=None, hold_frames=5,
+      sort_euclidean=False):
     """
     Transform text into a animated scatterplot gif.
     Every letter of the text is converted to a scatter plot.
@@ -244,4 +287,5 @@ def text_to_gif(text, out_path='output', repeat=True, intensity=10, rand = True,
               axis_on=axis_on, # axis and grid display
               sort_coords=sort_coords,
               sort_coords_asc=sort_coords_asc,
-              hold_frames=hold_frames)
+              hold_frames=hold_frames,
+              sort_euclidean=sort_euclidean)
