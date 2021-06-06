@@ -49,7 +49,9 @@ Use:
     With randoms, higher intensity means more points.  
     When plotting evenly spaced points (rand=False), this is the distance between the points.  
     A lower intensity means the points will be closer to each other with even points, so more points are plotted.
-  
+
+
+![](images/examples/mac.gif)
 ![](https://i.imgur.com/AxazcRR.gif)  
   
 ## Other methods
