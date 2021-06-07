@@ -17,8 +17,8 @@ try:
 except:
     from tqdm import tqdm
 
-def distance(v1, v2):
-    dist = [(a - b)**2 for a, b in zip(v1, v2)]
+def distance(xy, xy1):
+    dist = [(a - b)**2 for a, b in zip(xy, xy1)]
     dist = math.sqrt(sum(dist))
     return dist
 
@@ -35,8 +35,7 @@ def get_masked_data(letter, intensity = 2, rand=True, in_path=None):
     intensity:  This needs some work. When randonly positioning the points
                 the intensity is how many times 500 points will be generated.
                 With evenly sparced points, it controls the distance between the
-                points, where the space separating the points is 100 divided 
-                by intensity
+                points.
     rand: If true generates random points, if false generate evenly sparced points
     """
     # get mask from image
@@ -193,7 +192,7 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
                 del sorted_x1
                 del sorted_y1
                 gc.collect()
-                
+
         # calculate paths
         x_path = np.array(x1) - np.array(x)
         y_path = np.array(y1) - np.array(y)
