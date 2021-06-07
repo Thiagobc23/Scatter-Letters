@@ -68,7 +68,8 @@ build_gif() - Uses lists of coordinates to build the scatter plots and the trans
     - The mask should be black with a white background. See the example below;
 - Run text_to_gif() with the name of the images and the parameter in_path pointing to the directory you stored the mask;
 - Files named with more than a character should be refered between brackets;
-  
+- If you want to add just one mask and still use the rest of the letters, you can [download the images](https://drive.google.com/drive/folders/1J080WKsGvPLQFKRiNeBCDqZQUfxlxJNn?usp=sharing) to the directory you'll be using, add your custom mask, and refer to it with the argument `in_path`
+
 Example:
 
     - /current_dir
@@ -83,11 +84,8 @@ Example:
 ## More
 Check out the Jupyter Notebook and the Script at the [examples directory](https://github.com/Thiagobc23/Scatter-Letters/tree/main/examples) for more information.
 
-<<<<<<< HEAD
 ## Docs
 [GitHub](https://github.com/Thiagobc23/Scatter-Letters)  
 [PyPi](https://pypi.org/project/scatter-letters/)  
 [Medium Article - Basics of GIFs with Python’s Matplotlib](https://towardsdatascience.com/basics-of-gifs-with-pythons-matplotlib-54dd544b6f30)  
-=======
-`text_to_gif('abc[star]', in_path='images')`
->>>>>>> 8c3d30ac428fb96f2b68693c6fb79734a2a65374
+
