@@ -88,6 +88,7 @@ Check out the Jupyter Notebook and the Script at the [examples directory](https:
 You can find more images created with this package [here](https://imgur.com/gallery/RC1AiOo)
 
 ![](https://i.imgur.com/D5T0HYb.gif)
+![](images/nope.gif)
 
 ## Docs
 [GitHub](https://github.com/Thiagobc23/Scatter-Letters)  
