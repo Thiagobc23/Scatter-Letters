@@ -39,9 +39,10 @@ Use:
                 alpha=0.7, # markers opacity
                 axis_on=False, # plot spines and grid
                 sort_coords=False, # sort points in the transition - options(False, 'x', 'y')
+                sort_euclidean=False, # sort by distance (this is very heavy)
                 sort_coords_asc=True, # True - sort ascending / False - sort descending
                 in_path=None, # for custom input paths
-                hold_frames=20) # hold the complete letter for x frameS
+                hold_frames=20,) # hold the complete letter for x frameS
 
     *intensity:  
     When plotting random points (rand=True), this is how many times it'll generate 500 points at the start (before applying the mask).  
@@ -50,7 +51,7 @@ Use:
     A lower intensity means the points will be closer to each other with even points, so more points are plotted.
 
 
-![](images/examples/mac.gif)
+![](images/mac.gif)
 ![](https://i.imgur.com/AxazcRR.gif)  
   
 ## Other methods
@@ -83,6 +84,10 @@ Example:
 
 ## More
 Check out the Jupyter Notebook and the Script at the [examples directory](https://github.com/Thiagobc23/Scatter-Letters/tree/main/examples) for more information.
+
+You can find more images created with this package [here](https://imgur.com/gallery/RC1AiOo)
+
+![](https://i.imgur.com/D5T0HYb.gif)
 
 ## Docs
 [GitHub](https://github.com/Thiagobc23/Scatter-Letters)  
