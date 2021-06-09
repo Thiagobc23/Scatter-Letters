@@ -1,7 +1,9 @@
 # Scatter-Letters  
 [![pip version](https://img.shields.io/pypi/v/scatter_letters)](https://pypi.org/project/scatter-letters/)
-[![](https://img.shields.io/lgtm/grade/python/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)
-[![](https://img.shields.io/lgtm/alerts/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)  
+[![downloads](https://img.shields.io/pypi/dm/scatter_letters)](https://pypi.org/project/scatter-letters/)
+[![grade](https://img.shields.io/lgtm/grade/python/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)
+[![alerts](https://img.shields.io/lgtm/alerts/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)  
+
 A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other and build a GIF.  
 
 It uses OpenCV to create a mask from an image, draw a plot filled with random x/y coordinates, and filter the points inside the mask.  
