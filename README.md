@@ -1,8 +1,13 @@
 # Scatter-Letters  
 [![pip version](https://img.shields.io/pypi/v/scatter_letters)](https://pypi.org/project/scatter-letters/)
 [![downloads](https://img.shields.io/pypi/dm/scatter_letters)](https://pypi.org/project/scatter-letters/)
+![license](https://img.shields.io/pypi/l/scatter_letters)  
+
 [![grade](https://img.shields.io/lgtm/grade/python/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)
 [![alerts](https://img.shields.io/lgtm/alerts/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)  
+
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=Thiagobc23_Scatter-Letters&metric=alert_status)](https://sonarcloud.io/dashboard?id=Thiagobc23_Scatter-Letters)
+[![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=Thiagobc23_Scatter-Letters&metric=sqale_index)](https://sonarcloud.io/dashboard?id=Thiagobc23_Scatter-Letters)
 
 A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other and build a GIF.  
 
