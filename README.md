@@ -1,19 +1,16 @@
-# Scatter-Letters
+# Scatter-Letters  
+[![pip version](https://img.shields.io/pypi/v/scatter_letters)](https://pypi.org/project/scatter-letters/)
+[![](https://img.shields.io/lgtm/grade/python/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)
+[![](https://img.shields.io/lgtm/alerts/github/Thiagobc23/Scatter-Letters)](https://lgtm.com/projects/g/Thiagobc23/Scatter-Letters/)  
 A script to write letters with Matplotlib's scatter plots, create transitions from one plot to the other and build a GIF.  
 
-## Why?
-Because I tought it would be cool.  
-
-## How?
 It uses OpenCV to create a mask from an image, draw a plot filled with random x/y coordinates, and filter the points inside the mask.  
 Then it uses Matplotlib to draw the plots and transitions and ImageIO to build a gif.  
 
-## How to use
-
-Install:  
+## Install  
 `pip install scatter_letters`  
   
-Use:
+## Usage
 
     from scatter_letters import sl
     sl.text_to_gif('data_')
@@ -54,21 +51,21 @@ Use:
 ![](images/mac.gif)
 ![](https://i.imgur.com/AxazcRR.gif)  
   
-## Other methods
+### Other methods
 get_masked_data() - Create a list of random x/y coordinates and uses an image/mask to filter them.  
   
 text_to_data() - Transform a text into a list of lists with the previous method.  
   
 build_gif() - Uses lists of coordinates to build the scatter plots and the transitions, then save the result in a gif.  
   
-## Creating gif with custom images  
+### Creating gif with custom images  
   
 - Create a directory to store the masks, this will be your `in_path` argument;
-- Save a .png file with a mask at images/letters 
+- Save a .png file with a mask at the directory you created; 
     - The image should be 1000x1000 pixels;
     - The mask should be black with a white background. See the example below;
-- Run text_to_gif() with the name of the images and the parameter in_path pointing to the directory you stored the mask;
-- Files named with more than a character should be refered between brackets;
+- Run text_to_gif() with the text to be converted and the parameter in_path pointing to the directory you stored the masks;
+- Files named with more than one character should be refered between brackets;
 - If you want to add just one mask and still use the rest of the letters, you can [download the images](https://drive.google.com/drive/folders/1J080WKsGvPLQFKRiNeBCDqZQUfxlxJNn?usp=sharing) to the directory you'll be using, add your custom mask, and refer to it with the argument `in_path`
 
 Example:
