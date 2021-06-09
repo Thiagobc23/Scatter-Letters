@@ -9,14 +9,19 @@ import pandas as pd
 import math
 from collections import OrderedDict
 import gc
+import sys
 
 # check if in a ipython enviorment
 try:
     get_ipython()
     from tqdm.notebook import tqdm
+except (KeyboardInterrupt, SystemExit):
+  print('keyboard interrupt')
+  sys.exit()
 except:
     from tqdm import tqdm
 
+# calculate distance
 def distance(xy, xy1):
     dist = [(a - b)**2 for a, b in zip(xy, xy1)]
     dist = math.sqrt(sum(dist))
@@ -236,7 +241,7 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
 
             # repeat filenames to hold the initial/final image
             if (i == 0 and index == 0) or (i == n_frames):
-                for i in range(hold_frames):
+                for n in range(hold_frames):
                     filenames.append(filename)
 
             filenames.append(filename)

@@ -1,0 +1,10 @@
+MANIFEST.in
+README.md
+setup.py
+scatter_letters/__init__.py
+scatter_letters/masks.pkl
+scatter_letters/sl.py
+scatter_letters.egg-info/PKG-INFO
+scatter_letters.egg-info/SOURCES.txt
+scatter_letters.egg-info/dependency_links.txt
+scatter_letters.egg-info/top_level.txt
