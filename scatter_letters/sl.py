@@ -17,8 +17,6 @@ try:
     from tqdm.notebook import tqdm
 except Exception:
     from tqdm import tqdm
-except BaseException:
-    pass
 
 def distance(xy, xy1):
     dist = [(a - b)**2 for a, b in zip(xy, xy1)]
@@ -129,9 +127,6 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
         os.stat(out_path)
     except FileNotFoundError:
         os.mkdir(out_path)
-    except BaseException as e:
-        print(e)
-        pass
 
     filenames = []
     for index in tqdm(np.arange(0, len(coordinates_lists)-1), desc='Plotting'):
