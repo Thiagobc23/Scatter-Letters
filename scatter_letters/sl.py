@@ -23,6 +23,56 @@ def distance(xy, xy1):
     dist = math.sqrt(sum(dist))
     return dist
 
+def order_coords(x, y, x1, y1, sort_coords, sort_coords_asc):
+    xy = pd.DataFrame({'x':x, 'y':y}).sort_values(sort_coords, ascending=sort_coords_asc)
+    xy1 = pd.DataFrame({'x':x1, 'y':y1}).sort_values(sort_coords, ascending=sort_coords_asc)
+    
+    x = xy['x'].values.tolist()
+    y = xy['y'].values.tolist()
+    x1 = xy1['x'].values.tolist()
+    y1 = xy1['y'].values.tolist()
+    return x, y, x1, y1
+
+def order_dist(x, y, x1, y1):
+    sorted_x1 = []
+    sorted_y1 = []
+
+    for i in tqdm(range(len(x)), desc='Euclidean sort', leave=False):
+        dist = 9999999
+        for i in range(len(x1)):
+            dist_n = distance((x[0], y[0]), (x1[i], y1[i]))
+            if dist_n < dist:
+                dist = dist_n
+                idx = i
+
+        sorted_x1.append(x1.pop(idx))
+        sorted_y1.append(y1.pop(idx))
+    x1 = sorted_x1
+    y1 = sorted_y1
+    return x1, y1
+
+def draw_axis(axis_on, ax):
+    if(axis_on):
+        # grid
+        ax.set_axisbelow(True)
+        ax.yaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
+        ax.xaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
+    else:
+        # remove spines
+        ax.spines['left'].set_visible(False)
+        ax.spines['bottom'].set_visible(False)
+        # remove ticks
+        plt.xticks([])
+        plt.yticks([])
+
+def match_sizes(x, y, size):
+    while len(x) < size:
+        diff = size - len(x)
+        x = x + x[:diff]
+        y = y + y[:diff]
+
+    return x, y
+
 # transform a letter into random x/y points with the shape of that letter
 def get_masked_data(letter, intensity = 2, rand=True, in_path=None):
     """
@@ -150,49 +200,14 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
         del non_duplicates
         gc.collect()
 
-        while len(x) < len(x1):
-            diff = len(x1) - len(x)
-            x = x + x[:diff]
-            y = y + y[:diff]
-
-        while len(x1) < len(x):
-            diff = len(x) - len(x1)
-            x1 = x1 + x1[:diff]
-            y1 = y1 + y1[:diff]
-        del diff
-        gc.collect()
+        x, y = match_sizes(x, y, len(x1))
+        x1, y1 = match_sizes(x1, y1, len(x))
 
         if sort_coords:
-            xy = pd.DataFrame({'x':x, 'y':y}).sort_values(sort_coords, ascending=sort_coords_asc)
-            xy1 = pd.DataFrame({'x':x1, 'y':y1}).sort_values(sort_coords, ascending=sort_coords_asc)
+            x, y, x1, y1 = order_coords(x, y, x1, y1, sort_coords, sort_coords_asc)
             
-            x = xy['x'].values.tolist()
-            y = xy['y'].values.tolist()
-            x1 = xy1['x'].values.tolist()
-            y1 = xy1['y'].values.tolist()
-            del xy
-            del xy1
-            gc.collect()
-
             if sort_euclidean:
-                sorted_x1 = []
-                sorted_y1 = []
-
-                for i in tqdm(range(len(x)), desc='Euclidean sort', leave=False):
-                    dist = 9999999
-                    for i in range(len(x1)):
-                        dist_n = distance((x[0], y[0]), (x1[i], y1[i]))
-                        if dist_n < dist:
-                            dist = dist_n
-                            idx = i
-
-                    sorted_x1.append(x1.pop(idx))
-                    sorted_y1.append(y1.pop(idx))
-                x1 = sorted_x1
-                y1 = sorted_y1
-                del sorted_x1
-                del sorted_y1
-                gc.collect()
+                x1, y1 = order_dist(x, y, x1, y1)
 
         # calculate paths
         x_path = np.array(x1) - np.array(x)
@@ -219,25 +234,14 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
             # remove spines
             ax.spines['right'].set_visible(False)
             ax.spines['top'].set_visible(False)
-            if(axis_on):
-                # grid
-                ax.set_axisbelow(True)
-                ax.yaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
-                ax.xaxis.grid(color='gray', linestyle='dashed', alpha=0.7)
-            else:
-                # remove spines
-                ax.spines['left'].set_visible(False)
-                ax.spines['bottom'].set_visible(False)
-                # remove ticks
-                plt.xticks([])
-                plt.yticks([])
+            draw_axis(axis_on, ax)
 
             # build file name and append to list of file names
             filename = os.path.join(out_path,f'frame_{index}_{i}.png')
 
             # repeat filenames to hold the initial/final image
             if (i == 0 and index == 0) or (i == n_frames):
-                for n in range(hold_frames):
+                for _ in range(hold_frames):
                     filenames.append(filename)
 
             filenames.append(filename)
@@ -259,7 +263,7 @@ def build_gif(coordinates_lists, out_path='output', gif_name='movie', n_frames=1
     
     print('DONE')
    
-def text_to_gif(text, out_path='output', repeat=True, intensity=10, rand = True, gif_name='movie', n_frames=24, 
+def text_to_gif(text, out_path='output', repeat=True, intensity=10, rand=True, gif_name='movie', n_frames=24, 
       bg_color='#95A4AD', marker='o', marker_color='#283F4E', marker_size=10, fps=24,
       alpha=1, axis_on=True, sort_coords=False, sort_coords_asc=True, in_path=None, hold_frames=5,
       sort_euclidean=False):
