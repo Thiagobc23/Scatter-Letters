@@ -9,7 +9,6 @@ import pandas as pd
 import math
 from collections import OrderedDict
 import gc
-import sys
 
 # check if in a ipython enviorment
 try:
