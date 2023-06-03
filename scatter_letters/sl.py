@@ -90,7 +90,7 @@ def get_masked_data(letter, intensity = 2, rand=True, in_path=None):
     """
     # get mask from image
     if in_path:
-        mask = cv2.imread(os.path.join(in_path, f'{letter.upper()}.png',0))
+        mask = cv2.imread(os.path.join(in_path, f'{letter.upper()}.png'), 0)
         mask = cv2.flip(mask, 0)
     else:
         dir_path = os.path.dirname(os.path.realpath(__file__))
@@ -161,7 +161,7 @@ def text_to_data(txt, repeat=True, intensity = 10, rand=True, in_path=None):
     # if repeat is true, repeat first letter
     if repeat:
         if txt[0] == '[':
-            letters.append(get_masked_data(re.findall(r'[(.*?)]|$',txt)[0], intensity=intensity, rand=rand, in_path=in_path))
+            letters.append(get_masked_data(re.findall(r'\[(.*?)\]|$',txt)[0], intensity=intensity, rand=rand, in_path=in_path))
         else: 
             letters.append(get_masked_data(txt[0], intensity=intensity, rand=rand, in_path=in_path))
     return letters
